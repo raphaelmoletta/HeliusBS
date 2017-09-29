@@ -23,6 +23,7 @@ public class Model {
     }
     
     public synchronized void add(Data d) {
+        System.out.println(d.toString());
         this.data.add(d);
     }
     
