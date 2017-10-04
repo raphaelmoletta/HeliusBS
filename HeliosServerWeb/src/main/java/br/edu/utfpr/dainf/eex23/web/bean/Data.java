@@ -73,5 +73,19 @@ public class Data {
         this.thermometer = thermometer;
     }
     
-    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Status: ");
+        sb.append(status.name());
+        sb.append(", Voltage: ");
+        sb.append(voltage);
+        sb.append(", Current: ");
+        sb.append(current);
+        sb.append(", Pyranometer: ");
+        sb.append(pyranometer);
+        sb.append(", Thermometer: ");
+        sb.append(thermometer);
+        return sb.toString();
+    }
 }
