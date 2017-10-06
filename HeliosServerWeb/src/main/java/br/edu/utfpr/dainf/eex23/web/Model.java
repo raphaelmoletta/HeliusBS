@@ -1,8 +1,11 @@
 package br.edu.utfpr.dainf.eex23.web;
 
-import br.edu.utfpr.dainf.eex23.web.bean.Data;
+import br.edu.utfpr.dainf.eex23.heliusbeans.Data;
+import br.edu.utfpr.dainf.eex23.heliusbeans.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -11,15 +14,19 @@ import java.util.List;
 public class Model {
     private static Model model;
     private final List<Data> data;
+
     private Model() {
         data = new ArrayList<>();
     }
     
-    public synchronized Data getLast() {
+    public synchronized Instant getInstant() {
         if (data.isEmpty()) {
             return null;
         }
-        return data.get(data.size() - 1);
+        //TODO
+        Instant instant = new Instant();
+        instant.setTemperature(10);
+        return instant;
     }
     
     public synchronized void add(Data d) {
@@ -32,5 +39,9 @@ public class Model {
             model = new Model();
         }
         return model;
+    }
+
+    public Map<LocalDateTime, Double> getGraphic() {
+        return null;
     }
 }

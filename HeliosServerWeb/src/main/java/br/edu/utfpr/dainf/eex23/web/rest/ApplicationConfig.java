@@ -1,13 +1,14 @@
 package br.edu.utfpr.dainf.eex23.web.rest;
 
 import java.util.Set;
+import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
 /**
  *
  * @author rapha
  */
-@javax.ws.rs.ApplicationPath("webresources")
+@ApplicationPath("ws")
 public class ApplicationConfig extends Application {
 
     @Override

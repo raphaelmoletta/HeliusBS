@@ -1,7 +1,7 @@
 package br.edu.utfpr.dainf.eex23.web.listener;
 
+import br.edu.utfpr.dainf.eex23.heliusbeans.Data;
 import br.edu.utfpr.dainf.eex23.web.Model;
-import br.edu.utfpr.dainf.eex23.web.bean.Data;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import java.io.IOException;

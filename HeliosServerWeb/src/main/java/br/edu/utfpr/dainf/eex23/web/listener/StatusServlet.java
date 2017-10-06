@@ -20,7 +20,7 @@ public class StatusServlet extends HttpServlet {
 
     @Override
     public void init(ServletConfig servletConfig) {
-        
+        System.out.println("XXXXXXX: " + servletConfig.getServletContext().getContextPath()); 
     }
     
     @Override

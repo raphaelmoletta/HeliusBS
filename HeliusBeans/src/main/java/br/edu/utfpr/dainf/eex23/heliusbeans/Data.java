@@ -1,12 +1,15 @@
-package br.edu.utfpr.dainf.eex23.web.bean;
+package br.edu.utfpr.dainf.eex23.heliusbeans;
 
 import com.google.gson.annotations.SerializedName;
+import java.io.Serializable;
 
 /**
  *
  * @author rapha
  */
-public class Data {
+public class Data implements Serializable {
+    private static final long serialVersionUID = 7640412432724321891L;
+    
     public enum STATUS {ok,error,empty};
     @SerializedName("s")
     private STATUS status = STATUS.empty;

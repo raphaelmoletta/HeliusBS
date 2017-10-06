@@ -10,6 +10,9 @@
     </properties>
   <modules>
     <module>HeliosServerWeb</module>
+    <module>HeliusBeans</module>
+    <module>HeliusClient</module>
+    <module>HeliusData</module>
   </modules>
     <name>HeliusServer</name>
 </project>

@@ -1,10 +1,70 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Helius System</title>
+        <title>Helius System - Server</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="scripts/jquery-3.2.1.min.js" type="text/javascript"></script>
+        <script src="scripts/helius.js" type="text/javascript"></script>
+        <script src="scripts/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+        
+        <link href="scripts/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+        <link href="scripts/jquery-ui/jquery-ui.structure.min.css" rel="stylesheet" type="text/css"/>
+        <link href="scripts/jquery-ui/jquery-ui.theme.min.css" rel="stylesheet" type="text/css"/>
+
+        <link rel="apple-touch-icon" sizes="57x57" href="/images/favicon/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="/images/favicon/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/images/favicon/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="/images/favicon/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/images/favicon/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="/images/favicon/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="/images/favicon/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="/images/favicon/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+        <link rel="shortcut icon" href="/images/favicon/favicon-96x96.png" type="image/x-icon">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+        <meta name="theme-color" content="#ffffff">
+        <script>
+            $(function () {
+                $("#tabs").tabs();
+            });
+        </script>
     </head>
     <body>
-        <h1>Helius System</h1>
+        <img src="images/Logo300.png" style="width: 150 px; height: 150px;" alt=""/>
+        <div class="ui-state-default ui-widget" style="text-align: center">Helius Server</div>
+        
+        <div id="tabs">
+            <ul>
+                <li><a href="#tabs-1">Inicio</a></li>
+                <li><a href="#tabs-2">Status</a></li>
+                <li><a href="#tabs-3">Configurações</a></li>
+            </ul>
+            <div id="tabs-1">
+                <p>Servidor: </p>
+            </div>
+            <div id="tabs-2">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Comunicação UDP entrada:  </td>
+                            <td>Indisponível</td>
+                        </tr>
+                        <tr>
+                            <td>Número de pacotes recebidos:  </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="tabs-3">
+                <p>Servidor SQL: </p>
+                <button class="ui-button ui-widget ui-corner-all">Iniciar</button>
+                <p></p>
+            </div>
+        </div>
     </body>
 </html>
