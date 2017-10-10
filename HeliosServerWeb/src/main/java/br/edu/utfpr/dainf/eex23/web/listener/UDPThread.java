@@ -5,7 +5,7 @@ import br.edu.utfpr.dainf.eex23.web.Model;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import java.io.IOException;
-import java.io.StringReader;
+import java.io.StringReader; 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -21,11 +21,11 @@ import javax.ejb.Singleton;
  * @author rapha
  */
 @Singleton
-public class Threads {
+public class UDPThread {
 
     private DatagramSocket socket = null;
-    private boolean running = true;
-    public enum STATUS {Listening, Reciving, Stopped};
+    private volatile boolean running = true;
+    public enum STATUS {Listening, Reciving, Stopped, Error};
 
     private STATUS status = STATUS.Stopped;
 
@@ -48,17 +48,24 @@ public class Threads {
                     reader.setLenient(true);
                     Model.getInstance().add((Data) gson.fromJson(reader, Data.class));
                 }
-            } catch (UnknownHostException | SocketException ex) {
-                Logger.getLogger(Threads.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnknownHostException ex) {
+                status = STATUS.Error;
+                Logger.getLogger(UDPThread.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SocketException se) {
+                status = STATUS.Stopped;
             } catch (IOException ex) {
-                Logger.getLogger(Threads.class.getName()).log(Level.SEVERE, null, ex);
+                status = STATUS.Error;
+                Logger.getLogger(UDPThread.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
     
     public void stop() {
         running = false;
-        socket.close();
+        status = STATUS.Stopped;
+        if(!socket.isClosed()) {
+            socket.close();
+        }
     }
 
     public STATUS getStatus() {

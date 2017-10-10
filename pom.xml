@@ -13,6 +13,7 @@
     <module>HeliusBeans</module>
     <module>HeliusClient</module>
     <module>HeliusData</module>
+    <module>HeliusTester</module>
   </modules>
     <name>HeliusServer</name>
 </project>

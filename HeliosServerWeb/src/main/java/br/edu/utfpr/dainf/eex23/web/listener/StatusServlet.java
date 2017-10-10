@@ -1,6 +1,7 @@
 package br.edu.utfpr.dainf.eex23.web.listener;
 
 import java.io.IOException;
+import javax.ejb.EJB;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,44 +13,45 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Raphael Zagonel Moletta <raphael.moletta@gmail.com>
  */
-@WebServlet(urlPatterns = "/status", loadOnStartup = 1)
+@WebServlet(urlPatterns = "/status", loadOnStartup = 1, asyncSupported = true)
 public class StatusServlet extends HttpServlet {
-
     private final static long serialVersionUID = 5729648808745937099L;
-    private final static Threads threads = new Threads();
+    @EJB
+    private UDPThread thread = new UDPThread();
 
     @Override
     public void init(ServletConfig servletConfig) {
-        System.out.println("XXXXXXX: " + servletConfig.getServletContext().getContextPath()); 
+        System.out.println("XXXXXXX: " + servletConfig.getServletContext().getContextPath());
     }
-    
+
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println(thread);
         response.setContentType("text/plain");
         StringBuilder sb = new StringBuilder();
         sb.append("Status: ");
         String parameter = request.getParameter("action");
         System.out.println("Parameter:" + parameter);
-        if(parameter != null && parameter.equalsIgnoreCase("start") && threads.getStatus() == Threads.STATUS.Stopped) {
+        if (parameter != null && parameter.equalsIgnoreCase("start") && thread.getStatus() == UDPThread.STATUS.Stopped) {
             System.out.println("Starting...");
-            threads.start();
+            thread.start();
             System.out.println("Started");
-        } else if(parameter != null && parameter.equalsIgnoreCase("stop") && threads.getStatus() != Threads.STATUS.Stopped) {
+        } else if (parameter != null && parameter.equalsIgnoreCase("stop")) {
             System.out.println("Stopping...");
-            threads.stop();
+            thread.stop();
             System.out.println("Stopped");
         }
-        if (threads != null) {
-            sb.append(threads.getStatus().toString());
+        if (thread != null) {
+            sb.append(thread.getStatus().toString());
         } else {
             sb.append("Not initialized");
         }
 
         response.getWriter().println(sb.toString());
     }
-    
+
     @Override
     public void destroy() {
-        
+
     }
 }
