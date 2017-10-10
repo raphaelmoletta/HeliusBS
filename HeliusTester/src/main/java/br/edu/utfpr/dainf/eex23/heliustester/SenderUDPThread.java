@@ -31,7 +31,9 @@ public class SenderUDPThread implements Runnable {
         try {
             Data data;
             Gson gson = new Gson();        
-            ds = new DatagramSocket(11001, InetAddress.getByName("0.0.0.0"));
+            ds = new DatagramSocket(11001);
+            ds.setBroadcast(true);
+            ds.connect(InetAddress.getByName("255.255.255.255"), 11001);
             while(running) {
                 data = fill();
                 pack = gson.toJson(data, Data.class).getBytes();
@@ -46,6 +48,8 @@ public class SenderUDPThread implements Runnable {
             Logger.getLogger(SenderUDPThread.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(SenderUDPThread.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            stop();
         }
     }
     

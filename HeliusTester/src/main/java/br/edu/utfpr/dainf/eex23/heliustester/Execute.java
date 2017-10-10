@@ -8,11 +8,12 @@ import java.util.Scanner;
  */
 public class Execute {
     public static void main(String[] args) {
-        Runnable runnable = new SenderUDPThread();
+        SenderUDPThread runnable = new SenderUDPThread();
         Thread thread = new Thread(runnable);
         thread.start();
         System.out.println("Pressione qualquer tecla para continuar...");
         Scanner s = new Scanner(System.in);
         s.nextLine();
+        runnable.stop();
     }
 }
