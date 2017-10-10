@@ -33,7 +33,7 @@ public class SenderUDPThread implements Runnable {
             Gson gson = new Gson();        
             ds = new DatagramSocket(11001);
             ds.setBroadcast(true);
-            ds.connect(InetAddress.getByName("255.255.255.255"), 11001);
+            ds.connect(InetAddress.getByName("255.255.255.255"), 11000);
             while(running) {
                 data = fill();
                 pack = gson.toJson(data, Data.class).getBytes();
