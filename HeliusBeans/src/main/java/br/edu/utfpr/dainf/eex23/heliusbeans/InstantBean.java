@@ -7,7 +7,7 @@ import java.io.Serializable;
  *
  * @author Raphael Zagonel Moletta <raphael.moletta@gmail.com>
  */
-public class Instant implements Serializable {
+public class InstantBean implements Serializable {
     private static final long serialVersionUID = -6946324531882801415L;
     
     @SerializedName("temperature")

@@ -7,7 +7,7 @@ import java.io.Serializable;
  *
  * @author rapha
  */
-public class Data implements Serializable {
+public class DataBean implements Serializable {
     private static final long serialVersionUID = 7640412432724321891L;
     
     public enum STATUS {ok,error,empty};
@@ -22,11 +22,11 @@ public class Data implements Serializable {
     @SerializedName("t")
     private double thermometer = 0;
 
-    public Data() {
+    public DataBean() {
         
     }
     
-    public Data(STATUS status, double voltage, double current, double pyranometer, double thermometer) {
+    public DataBean(STATUS status, double voltage, double current, double pyranometer, double thermometer) {
         this.status = status;
         this.voltage = voltage;
         this.current = current;

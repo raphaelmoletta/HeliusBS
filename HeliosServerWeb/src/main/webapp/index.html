@@ -34,7 +34,7 @@
             });
         </script>
     </head>
-    <body>
+    <body onload="heliusjs.load();">
         <img src="images/Logo300.png" style="width: 150 px; height: 150px;" alt=""/>
         <div class="ui-state-default ui-widget" style="text-align: center">Helius Server</div>
         
@@ -46,8 +46,10 @@
             </ul>
             <div id="tabs-1">
                 <p>Servidor: </p>
+                <p id="json"></p>
             </div>
             <div id="tabs-2">
+                <p>Servidor UDP: <span id="statusUDP"></span></p>
                 <table>
                     <tbody>
                         <tr>
@@ -62,8 +64,8 @@
             </div>
             <div id="tabs-3">
                 <p>Servidor SQL: </p>
-                <button class="ui-button ui-widget ui-corner-all">Iniciar</button>
-                <p></p>
+                
+                <p>Servidor UDP: <button id="startStop" onclick="heliusjs.startStop();" class="ui-button ui-widget ui-corner-all">Iniciar</button></p>
             </div>
         </div>
     </body>

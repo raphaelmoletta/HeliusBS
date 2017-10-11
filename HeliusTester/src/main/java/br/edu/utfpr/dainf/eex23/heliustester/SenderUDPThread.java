@@ -5,7 +5,7 @@
  */
 package br.edu.utfpr.dainf.eex23.heliustester;
 
-import br.edu.utfpr.dainf.eex23.heliusbeans.Data;
+import br.edu.utfpr.dainf.eex23.heliusbeans.DataBean;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -29,14 +29,14 @@ public class SenderUDPThread implements Runnable {
     @Override
     public void run() {
         try {
-            Data data;
+            DataBean data;
             Gson gson = new Gson();        
             ds = new DatagramSocket(11001);
             ds.setBroadcast(true);
             ds.connect(InetAddress.getByName("255.255.255.255"), 11000);
             while(running) {
                 data = fill();
-                pack = gson.toJson(data, Data.class).getBytes();
+                pack = gson.toJson(data, DataBean.class).getBytes();
                 System.out.println(new String(pack));
                 dp = new DatagramPacket(pack, pack.length);
                 ds.send(dp);
@@ -60,11 +60,11 @@ public class SenderUDPThread implements Runnable {
         }
     }
     
-    private Data fill() {
-        Data data = new Data();
+    private DataBean fill() {
+        DataBean data = new DataBean();
         data.setCurrent((Math.random() * 100));
         data.setPyranometer((Math.random() * 100));
-        data.setStatus(Data.STATUS.ok);
+        data.setStatus(DataBean.STATUS.ok);
         data.setThermometer((Math.random() * 100));
         data.setVoltage((Math.random() * 100));
         return data;

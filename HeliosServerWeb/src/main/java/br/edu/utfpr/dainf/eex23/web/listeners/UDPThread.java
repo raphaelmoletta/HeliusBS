@@ -1,11 +1,12 @@
-package br.edu.utfpr.dainf.eex23.web.listener;
+package br.edu.utfpr.dainf.eex23.web.listeners;
 
-import br.edu.utfpr.dainf.eex23.heliusbeans.Data;
+import br.edu.utfpr.dainf.eex23.heliusbeans.DataBean;
+import br.edu.utfpr.dainf.eex23.heliusbeans.StatusBean.STATUS;
 import br.edu.utfpr.dainf.eex23.web.Model;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import java.io.IOException;
-import java.io.StringReader; 
+import java.io.StringReader;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -24,10 +25,6 @@ import javax.ejb.Singleton;
 public class UDPThread {
 
     private DatagramSocket socket = null;
-    private volatile boolean running = true;
-    public enum STATUS {Listening, Reciving, Stopped, Error};
-
-    private STATUS status = STATUS.Stopped;
 
     @Asynchronous
     public void start() {
@@ -38,37 +35,30 @@ public class UDPThread {
                 JsonReader reader;
                 byte data[] = new byte[1024];
                 Gson gson = new Gson();
-                while (running) {
+                while (Status.getInstance().isRunning()) {
                     packet = new DatagramPacket(data, data.length);
-                    status = STATUS.Listening;
+                    Status.getInstance().setActualStatus(STATUS.Listening);
                     socket.receive(packet);
-                    status = STATUS.Reciving;
+                    Status.getInstance().setActualStatus(STATUS.Reciving);
                     System.out.println(new String(data));
                     reader = new JsonReader(new StringReader(new String(data)));
                     reader.setLenient(true);
-                    Model.getInstance().add((Data) gson.fromJson(reader, Data.class));
+                    Model.getInstance().add((DataBean) gson.fromJson(reader, DataBean.class));
                 }
             } catch (UnknownHostException ex) {
-                status = STATUS.Error;
+                Status.getInstance().setActualStatus(STATUS.Error);
                 Logger.getLogger(UDPThread.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SocketException se) {
-                status = STATUS.Stopped;
+                Status.getInstance().setActualStatus(STATUS.Stopped);
             } catch (IOException ex) {
-                status = STATUS.Error;
+                Status.getInstance().setActualStatus(STATUS.Error);
                 Logger.getLogger(UDPThread.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                if (!socket.isClosed()) {
+                    Status.getInstance().setActualStatus(STATUS.Stopped);
+                    socket.close();
+                }
             }
         }
-    }
-    
-    public void stop() {
-        running = false;
-        status = STATUS.Stopped;
-        if(!socket.isClosed()) {
-            socket.close();
-        }
-    }
-
-    public STATUS getStatus() {
-        return status;
     }
 }

@@ -1,6 +1,6 @@
 package br.edu.utfpr.dainf.eex23.web.rest;
 
-import br.edu.utfpr.dainf.eex23.heliusbeans.Instant;
+import br.edu.utfpr.dainf.eex23.heliusbeans.InstantBean;
 import br.edu.utfpr.dainf.eex23.web.Model;
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -34,7 +34,7 @@ public class Rest {
     @GET
     @Path("instant")
     @Produces(MediaType.APPLICATION_JSON)
-    public Instant getInstant() {
+    public InstantBean getInstant() {
         return Model.getInstance().getInstant();
         
     }

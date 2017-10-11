@@ -1,6 +1,6 @@
 package br.edu.utfpr.dainf.eex23.heliusclient;
 
-import br.edu.utfpr.dainf.eex23.heliusbeans.Instant;
+import br.edu.utfpr.dainf.eex23.heliusbeans.InstantBean;
 import java.time.LocalDateTime;
 import java.util.Map;
 
@@ -17,7 +17,7 @@ public class HeliusClient {
     }
     
     //Temperatura Ambiente, Eficiência, Incidência Solar, Economia desde o início
-    public Instant getInstant(){
+    public InstantBean getInstant(){
         return null;
     }
     
